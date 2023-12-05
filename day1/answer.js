@@ -1,9 +1,6 @@
-const fs = require("fs");
 const R = require("ramda");
+const { readRows, convertToNumber } = require("../utils");
 
-const data = fs.readFileSync(__dirname + "/input.txt", "utf-8");
-
-const convertToNumber = R.partialRight(parseInt, [10]);
 const isNumber = R.compose(R.not, isNaN, convertToNumber);
 
 const answer = R.compose(
@@ -14,8 +11,7 @@ const answer = R.compose(
       R.converge((a, b) => `${a}${b}`, [R.find(isNumber), R.findLast(isNumber)])
     )
   ),
-  R.filter(R.complement(R.isEmpty)),
-  R.split(/\r?\n/)
-)(data);
+  R.filter(R.complement(R.isEmpty))
+)(readRows(__dirname));
 
 console.log(answer);
