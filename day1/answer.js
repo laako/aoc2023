@@ -10,8 +10,7 @@ const answer = R.compose(
       convertToNumber,
       R.converge((a, b) => `${a}${b}`, [R.find(isNumber), R.findLast(isNumber)])
     )
-  ),
-  R.filter(R.complement(R.isEmpty))
+  )
 )(readRows(__dirname));
 
 console.log(answer);
