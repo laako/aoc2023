@@ -10,8 +10,8 @@ const readRows = (dir) =>
 const readCalibration = (dir) =>
   R.compose(
     R.filter(R.complement(R.isEmpty)),
-    R.split(/\r?\n/, fs.readFileSync(dir + "/calibration.txt", "utf-8"))
-  );
+    R.split(/\r?\n/)
+  )(fs.readFileSync(dir + "/calibration.txt", "utf-8"));
 
 const convertToNumber = R.partialRight(parseInt, [10]);
 
